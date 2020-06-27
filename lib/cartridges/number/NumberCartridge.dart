@@ -8,6 +8,8 @@ class NumberCartridge extends StatefulWidget {
 class _NumberCartridgeState extends State<NumberCartridge> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text('Hello'),
+    );
   }
 }

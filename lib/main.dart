@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutterKid/home.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterKid/sfx.dart';
+import 'package:flutterKid/system.dart';
+import 'cartridges/number/NumberCartridge.dart';
 
 void main() {
   runApp(MyApp());
   Sfx().loadSounds();
+  System().loadCartridge(NumberCartridge());
 }
 
 class MyApp extends StatelessWidget {
