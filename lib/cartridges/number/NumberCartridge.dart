@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterKid/typography/GameTypography.dart';
 
 class NumberCartridge extends StatefulWidget {
   @override
@@ -9,7 +10,9 @@ class _NumberCartridgeState extends State<NumberCartridge> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Hello'),
+      child: Center(
+        child: GameTitleText('Hello'),
+      ),
     );
   }
 }
