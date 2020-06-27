@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterKid/home.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterKid/sfx.dart';
 
 void main() {
   runApp(MyApp());
+  Sfx().loadSounds();
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter GameKid',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,

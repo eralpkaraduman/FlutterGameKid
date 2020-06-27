@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterKid/screen.dart';
+import 'package:flutterKid/widgets/CircleButton.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -52,6 +53,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ],
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(60.0),
+                  child: CircleButton(),
                 ),
                 Text(
                   '$_counter',
