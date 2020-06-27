@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterKid/screen.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -10,6 +11,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  double _aspectRatio = 914 / 1574;
 
   void _incrementCounter() {
     setState(() {
@@ -21,25 +23,42 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 173, 167, 153),
-          image: DecorationImage(
-            image: AssetImage("assets/images/gameboy.png"),
-            fit: BoxFit.fitWidth,
-          ),
-        ),
+        color: Color.fromARGB(255, 173, 167, 153),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
+          child: AspectRatio(
+            aspectRatio: _aspectRatio,
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                Image(
+                  image: AssetImage("assets/images/gameboy.png"),
+                  fit: BoxFit.contain,
+                ),
+                SizedBox.expand(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Flexible(
+                        child: FractionallySizedBox(
+                          heightFactor: 0.13,
+                        ),
+                      ),
+                      Flexible(
+                        child: FractionallySizedBox(
+                          widthFactor: 0.56,
+                          heightFactor: 0.60,
+                          child: Screen(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
           ),
         ),
       ),
