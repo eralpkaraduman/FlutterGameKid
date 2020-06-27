@@ -3,14 +3,16 @@ import 'package:flutterKid/widgets/OpacityButton.dart';
 import '../shapes/CirclePainter.dart';
 
 class CircleButton extends StatelessWidget {
-  const CircleButton({Key key}) : super(key: key);
-
+  const CircleButton({Key key, @required this.onTap}) : super(key: key);
+  final void Function() onTap;
+  final double size = 50;
   @override
   Widget build(BuildContext context) {
     return OpacityButton(
-      painter: CirclePainter(44),
-      width: 44,
-      height: 44,
+      painter: CirclePainter(size),
+      width: size,
+      height: size,
+      onTap: onTap,
     );
   }
 }

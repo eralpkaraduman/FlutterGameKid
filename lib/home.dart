@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterKid/input.dart';
 import 'package:flutterKid/screen.dart';
 import 'package:flutterKid/widgets/CircleButton.dart';
+import 'package:flutterKid/widgets/PillButton.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -54,9 +56,23 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(60.0),
-                  child: CircleButton(),
+                Container(
+                  child: CircleButton(
+                    onTap: () => Input().pressButtonA(),
+                  ),
+                  alignment: FractionalOffset(0.93, 0.592),
+                ),
+                Container(
+                  child: CircleButton(
+                    onTap: () => Input().pressButtonB(),
+                  ),
+                  alignment: FractionalOffset(0.738, 0.643),
+                ),
+                Container(
+                  child: PillButton(
+                    onTap: () => Input().pressButtonStart(),
+                  ),
+                  alignment: FractionalOffset(0.532, 0.781),
                 ),
                 Text(
                   '$_counter',

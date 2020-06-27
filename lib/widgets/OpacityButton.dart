@@ -6,11 +6,13 @@ import 'package:flutterKid/sfx.dart';
 class OpacityButton extends StatefulWidget {
   final CustomPainter painter;
   final double width, height;
+  final void Function() onTap;
   @override
   _OpacityButtonState createState() =>
-      _OpacityButtonState(painter, width, height);
+      _OpacityButtonState(painter, width, height, onTap);
   const OpacityButton(
       {Key key,
+      @required this.onTap,
       @required this.painter,
       @required this.width,
       @required this.height})
@@ -21,20 +23,21 @@ class _OpacityButtonState extends State<OpacityButton> {
   bool isTappedDown = false;
   final CustomPainter painter;
   final double width, height;
-  _OpacityButtonState(this.painter, this.width, this.height);
+  final void Function() onTap;
+  _OpacityButtonState(this.painter, this.width, this.height, this.onTap);
 
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       duration: Duration(milliseconds: 200),
-      // opacity: isTappedDown ? 1 : 0,
-      opacity: isTappedDown ? 0 : 1,
+      opacity: isTappedDown ? 1 : 0,
+      // opacity: isTappedDown ? 0 : 1,
       child: GestureDetector(
         child: Container(
-          color: Colors.black,
           width: this.width,
           height: this.height,
           child: CustomPaint(painter: this.painter),
+          // color: Colors.red,
         ),
         onTapDown: (_) {
           setState(() {
@@ -52,8 +55,8 @@ class _OpacityButtonState extends State<OpacityButton> {
           });
         },
         onTap: () {
+          this.onTap();
           double rand = new Random().nextDouble() * 10;
-          print(rand);
           if (rand.round() % 2 == 0) {
             Sfx().playButton1();
           } else {

@@ -8,7 +8,7 @@ class CirclePainter extends CustomPainter {
 
   CirclePainter(this.width) {
     _paint = Paint()
-      ..color = Colors.red
+      ..color = Color.fromARGB(150, 0, 0, 0)
       ..strokeWidth = 10.0
       ..style = PaintingStyle.fill;
   }
