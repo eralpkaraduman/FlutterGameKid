@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterKid/sfx.dart';
 import 'package:flutterKid/typography/GameTypography.dart';
 import 'package:flutterKid/input.dart';
 
@@ -13,6 +14,7 @@ class _NumberCartridgeState extends State<NumberCartridge> {
   void initState() {
     Input().getStream(InputKey.A).listen((keyDown) {
       if (keyDown) {
+        Sfx().playBlip();
         setState(() => _counter++);
       }
     });
