@@ -38,6 +38,15 @@ class _ButtonGameCartridgeState extends State<ButtonGameCartridge> {
           children: <Widget>[
             if (!_gameStarted) ...[
               GameTitleText('Button Game'),
+              Flexible(
+                child: FractionallySizedBox(
+                  widthFactor: 0.9,
+                  heightFactor: 0.9,
+                  child: Image(
+                    image: AssetImage("assets/images/button-game.png"),
+                  ),
+                ),
+              ),
               GameTitleText('Press Start'),
             ] else ...[
               GameTitleText('Press "A" to make the number go up'),
