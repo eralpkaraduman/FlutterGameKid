@@ -1,68 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutterKid/input.dart';
-import 'package:flutterKid/screen.dart';
-import 'package:flutterKid/widgets/CircleButton.dart';
-import 'package:flutterKid/widgets/PillButton.dart';
+import 'console.dart';
 
-class MyHomePage extends StatelessWidget {
-  final double _aspectRatio = 914 / 1574;
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final double swipeSenstivity = 40;
+  bool _showConsole = false;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: Container(
-        color: Color.fromARGB(255, 173, 167, 153),
-        child: Center(
-          child: AspectRatio(
-            aspectRatio: _aspectRatio,
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: <Widget>[
-                Image(
-                  image: AssetImage("assets/images/gameboy.png"),
-                  fit: BoxFit.contain,
-                ),
-                SizedBox.expand(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Flexible(
-                        child: FractionallySizedBox(
-                          heightFactor: 0.13,
-                        ),
-                      ),
-                      Flexible(
-                        child: FractionallySizedBox(
-                          widthFactor: 0.56,
-                          heightFactor: 0.60,
-                          child: Screen(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  child: CircleButton(
-                    onKeyDown: () => Input().handleKeyDown(InputKey.A),
-                    onKeyUp: () => Input().handleKeyUp(InputKey.A),
-                  ),
-                  alignment: FractionalOffset(0.93, 0.592),
-                ),
-                Container(
-                  child: CircleButton(
-                      onKeyDown: () => Input().handleKeyDown(InputKey.B),
-                      onKeyUp: () => Input().handleKeyUp(InputKey.B)),
-                  alignment: FractionalOffset(0.738, 0.643),
-                ),
-                Container(
-                  child: PillButton(
-                      onKeyDown: () => Input().handleKeyDown(InputKey.Start),
-                      onKeyUp: () => Input().handleKeyUp(InputKey.Start)),
-                  alignment: FractionalOffset(0.532, 0.781),
-                )
-              ],
+      body: GestureDetector(
+        onVerticalDragUpdate: (details) {
+          print(details.delta.dy);
+          if (details.delta.dy > swipeSenstivity) {
+            this.setState(() => _showConsole = false);
+          } else if (details.delta.dy < -swipeSenstivity) {
+            this.setState(() => _showConsole = true);
+          }
+        },
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: <Widget>[
+            Container(
+              color: Colors.red,
             ),
-          ),
+            AnimatedPositioned(
+              top: _showConsole ? 0 : (size.height * 0.60),
+              height: size.height,
+              width: size.width,
+              duration: Duration(milliseconds: 650),
+              curve: Curves.bounceOut,
+              child: Console(),
+            ),
+          ],
         ),
       ),
     );

@@ -3,13 +3,14 @@ import 'package:flutterKid/home.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterKid/sfx.dart';
 import 'package:flutterKid/system.dart';
+
 import 'cartridges/buttonGame/ButtonGameCartridge.dart';
 
 void main() {
   runApp(MyApp());
   Sfx().loadSounds();
-  // System().loadCartridge(ButtonGameCartridge());
-  System().loadCartridge(null);
+  System().loadCartridge(ButtonGameCartridge());
+  // System().loadCartridge(null);
 }
 
 class MyApp extends StatelessWidget {

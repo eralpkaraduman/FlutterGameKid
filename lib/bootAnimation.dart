@@ -45,7 +45,7 @@ class _BootAnimationState extends State<BootAnimation> {
       curve: Curves.linear,
       onEnd: () {
         Sfx().playGameBoyStart();
-        Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(seconds: 2), () {
           // Play audio
           onComplete();
         });

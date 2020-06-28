@@ -22,7 +22,9 @@ class _ButtonGameCartridgeState extends State<ButtonGameCartridge> {
     Input().getStream(InputKey.Start).listen((keyDown) {
       if (!_gameStarted && keyDown) {
         Sfx().playStart();
-        setState(() => _gameStarted = true);
+        Future.delayed(Duration(seconds: 1), () {
+          setState(() => _gameStarted = true);
+        });
       }
     });
     super.initState();
