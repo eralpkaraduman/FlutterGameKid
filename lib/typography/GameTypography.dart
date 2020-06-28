@@ -27,3 +27,15 @@ class GameGiantText extends Text {
               color: gameBoyColorDarkestGreen),
         );
 }
+
+class RegularText extends Text {
+  RegularText(String data, {Key key})
+      : super(data,
+            key: key,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+            ));
+}

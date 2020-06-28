@@ -8,13 +8,16 @@ class Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Container(
-        color: gameBoyColorLightestGreen,
-        child: StreamBuilder<Widget>(
-            stream: System().loadedGameStream,
-            builder: (_, snap) {
-              return snap.data;
-            }),
+      child: AbsorbPointer(
+        absorbing: false,
+        child: Container(
+          color: gameBoyColorLightestGreen,
+          child: StreamBuilder<Widget>(
+              stream: System().loadedGameStream,
+              builder: (_, snap) {
+                return snap.data;
+              }),
+        ),
       ),
     );
   }

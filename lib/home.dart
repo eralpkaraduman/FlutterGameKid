@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterKid/typography/GameTypography.dart';
 import 'console.dart';
+import 'colors.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -7,7 +9,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final double swipeSenstivity = 40;
+  final double swipeSenstivity = 30;
   bool _showConsole = false;
 
   @override
@@ -24,21 +26,34 @@ class _MyHomePageState extends State<MyHomePage> {
             this.setState(() => _showConsole = true);
           }
         },
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: <Widget>[
-            Container(
-              color: Colors.red,
-            ),
-            AnimatedPositioned(
-              top: _showConsole ? 0 : (size.height * 0.60),
-              height: size.height,
-              width: size.width,
-              duration: Duration(milliseconds: 650),
-              curve: Curves.bounceOut,
-              child: Console(),
-            ),
-          ],
+        child: Container(
+          color: Colors.blueGrey,
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: <Widget>[
+              AnimatedOpacity(
+                opacity: _showConsole ? 1 : 0,
+                duration: Duration(milliseconds: 450),
+                child: Container(color: gameBoyColorBeige),
+              ),
+              Positioned(
+                top: size.height * 0.45,
+                child: AnimatedOpacity(
+                  opacity: _showConsole ? 0 : 1,
+                  duration: Duration(milliseconds: 450),
+                  child: RegularText('Swipe up to play'),
+                ),
+              ),
+              AnimatedPositioned(
+                top: _showConsole ? 0 : (size.height * 0.50),
+                height: size.height,
+                width: size.width,
+                duration: Duration(milliseconds: 450),
+                curve: Curves.bounceOut,
+                child: Console(active: _showConsole),
+              ),
+            ],
+          ),
         ),
       ),
     );

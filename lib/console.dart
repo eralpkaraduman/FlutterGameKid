@@ -3,17 +3,18 @@ import 'package:flutterKid/input.dart';
 import 'package:flutterKid/screen.dart';
 import 'package:flutterKid/widgets/CircleButton.dart';
 import 'package:flutterKid/widgets/PillButton.dart';
+import 'package:flutterKid/typography/GameTypography.dart';
 
 class Console extends StatelessWidget {
-  final double _aspectRatio = 914 / 1574;
+  Console({Key key, @required this.active}) : super(key: key);
 
-  const Console({Key key}) : super(key: key);
+  final bool active;
+  final double _aspectRatio = 914 / 1574;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        color: Color.fromARGB(255, 173, 167, 153),
         child: Center(
           child: AspectRatio(
             aspectRatio: _aspectRatio,
@@ -61,7 +62,11 @@ class Console extends StatelessWidget {
                       onKeyDown: () => Input().handleKeyDown(InputKey.Start),
                       onKeyUp: () => Input().handleKeyUp(InputKey.Start)),
                   alignment: FractionalOffset(0.532, 0.781),
-                )
+                ),
+                Positioned(
+                  bottom: 10,
+                  child: RegularText("Swipe down to change the cartridge"),
+                ),
               ],
             ),
           ),
