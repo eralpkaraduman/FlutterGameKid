@@ -4,23 +4,8 @@ import 'package:flutterKid/screen.dart';
 import 'package:flutterKid/widgets/CircleButton.dart';
 import 'package:flutterKid/widgets/PillButton.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  double _aspectRatio = 914 / 1574;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyHomePage extends StatelessWidget {
+  final double _aspectRatio = 914 / 1574;
 
   @override
   Widget build(BuildContext context) {
@@ -58,35 +43,27 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   child: CircleButton(
-                    onTap: () => Input().pressButtonA(),
+                    onKeyDown: () => Input().handleKeyDown(InputKey.A),
+                    onKeyUp: () => Input().handleKeyUp(InputKey.A),
                   ),
                   alignment: FractionalOffset(0.93, 0.592),
                 ),
                 Container(
                   child: CircleButton(
-                    onTap: () => Input().pressButtonB(),
-                  ),
+                      onKeyDown: () => Input().handleKeyDown(InputKey.B),
+                      onKeyUp: () => Input().handleKeyUp(InputKey.B)),
                   alignment: FractionalOffset(0.738, 0.643),
                 ),
                 Container(
                   child: PillButton(
-                    onTap: () => Input().pressButtonStart(),
-                  ),
+                      onKeyDown: () => Input().handleKeyDown(InputKey.Start),
+                      onKeyUp: () => Input().handleKeyUp(InputKey.Start)),
                   alignment: FractionalOffset(0.532, 0.781),
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
+                )
               ],
             ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
