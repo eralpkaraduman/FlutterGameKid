@@ -3,12 +3,12 @@ import 'package:flutterKid/sfx.dart';
 import 'package:flutterKid/typography/GameTypography.dart';
 import 'package:flutterKid/input.dart';
 
-class NumberCartridge extends StatefulWidget {
+class ButtonGameCartridge extends StatefulWidget {
   @override
-  _NumberCartridgeState createState() => _NumberCartridgeState();
+  _ButtonGameCartridgeState createState() => _ButtonGameCartridgeState();
 }
 
-class _NumberCartridgeState extends State<NumberCartridge> {
+class _ButtonGameCartridgeState extends State<ButtonGameCartridge> {
   int _counter = 0;
 
   void initState() {

@@ -1,8 +1,6 @@
 import 'package:soundpool/soundpool.dart';
 import 'package:flutter/services.dart';
 
-loadSounds() {}
-
 class Sfx {
   Soundpool _pool = Soundpool(streamType: StreamType.notification);
   static final Sfx _singleton = Sfx._internal();

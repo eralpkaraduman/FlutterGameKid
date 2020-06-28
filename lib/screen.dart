@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterKid/system.dart';
+import 'package:flutterKid/colors.dart';
 
 class Screen extends StatelessWidget {
   const Screen({Key key}) : super(key: key);
@@ -8,7 +9,7 @@ class Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        color: Colors.green,
+        color: gameBoyColorLightestGreen,
         child: System().loadedGame,
       ),
     );
