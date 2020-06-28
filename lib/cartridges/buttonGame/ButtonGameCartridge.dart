@@ -10,12 +10,19 @@ class ButtonGameCartridge extends StatefulWidget {
 
 class _ButtonGameCartridgeState extends State<ButtonGameCartridge> {
   int _counter = 0;
+  bool _gameStarted = false;
 
   void initState() {
     Input().getStream(InputKey.A).listen((keyDown) {
-      if (keyDown) {
+      if (_gameStarted && keyDown) {
         Sfx().playBlip();
         setState(() => _counter++);
+      }
+    });
+    Input().getStream(InputKey.Start).listen((keyDown) {
+      if (!_gameStarted && keyDown) {
+        Sfx().playStart();
+        setState(() => _gameStarted = true);
       }
     });
     super.initState();
@@ -29,8 +36,13 @@ class _ButtonGameCartridgeState extends State<ButtonGameCartridge> {
         padding: const EdgeInsets.all(5.0),
         child: Column(
           children: <Widget>[
-            GameTitleText('Press "A" to make the number go up'),
-            GameGiantText('$_counter'),
+            if (!_gameStarted) ...[
+              GameTitleText('Button Game'),
+              GameTitleText('Press Start'),
+            ] else ...[
+              GameTitleText('Press "A" to make the number go up'),
+              GameGiantText('$_counter'),
+            ]
           ],
         ),
       )),

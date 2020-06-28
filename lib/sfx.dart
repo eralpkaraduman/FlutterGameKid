@@ -9,7 +9,9 @@ class Sfx {
       _soundIdButton2,
       _soundIdButton2stream,
       _soundIdBlip,
-      _soundIdBlipStream;
+      _soundIdBlipStream,
+      _soundIdStart,
+      _soundIdStartStream;
 
   factory Sfx() {
     return _singleton;
@@ -28,6 +30,11 @@ class Sfx {
     });
     _soundIdBlip = await rootBundle
         .load("assets/sounds/blip.mp3")
+        .then((ByteData soundData) {
+      return _pool.load(soundData);
+    });
+    _soundIdStart = await rootBundle
+        .load("assets/sounds/start.mp3")
         .then((ByteData soundData) {
       return _pool.load(soundData);
     });
@@ -52,6 +59,13 @@ class Sfx {
       await _pool.stop(_soundIdBlipStream);
     }
     _soundIdBlipStream = await _pool.play(_soundIdBlip);
+  }
+
+  void playStart() async {
+    if (_soundIdStartStream != null) {
+      await _pool.stop(_soundIdStartStream);
+    }
+    _soundIdStartStream = await _pool.play(_soundIdStart);
   }
 
   Sfx._internal();
