@@ -8,7 +8,8 @@ import 'cartridges/buttonGame/ButtonGameCartridge.dart';
 void main() {
   runApp(MyApp());
   Sfx().loadSounds();
-  System().loadCartridge(ButtonGameCartridge());
+  // System().loadCartridge(ButtonGameCartridge());
+  System().loadCartridge(null);
 }
 
 class MyApp extends StatelessWidget {

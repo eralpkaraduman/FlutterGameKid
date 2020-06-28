@@ -17,10 +17,14 @@ class System {
   }
 
   void loadCartridge(Widget cartridgeWidget) {
+    bool empty = cartridgeWidget == null;
     _loadedGame = BootAnimation(
+      noCartridge: empty,
       onComplete: () async {
-        _loadedGame = cartridgeWidget;
-        updateStreams();
+        if (!empty) {
+          _loadedGame = cartridgeWidget;
+          updateStreams();
+        }
       },
     );
     updateStreams();

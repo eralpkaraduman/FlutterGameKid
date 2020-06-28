@@ -11,7 +11,9 @@ class Sfx {
       _soundIdBlip,
       _soundIdBlipStream,
       _soundIdStart,
-      _soundIdStartStream;
+      _soundIdStartStream,
+      _soundIdGameBoyStart,
+      _soundIdGameBoyStartStream;
 
   factory Sfx() {
     return _singleton;
@@ -35,6 +37,11 @@ class Sfx {
     });
     _soundIdStart = await rootBundle
         .load("assets/sounds/start.mp3")
+        .then((ByteData soundData) {
+      return _pool.load(soundData);
+    });
+    _soundIdGameBoyStart = await rootBundle
+        .load("assets/sounds/gameboy-start.mp3")
         .then((ByteData soundData) {
       return _pool.load(soundData);
     });
@@ -66,6 +73,13 @@ class Sfx {
       await _pool.stop(_soundIdStartStream);
     }
     _soundIdStartStream = await _pool.play(_soundIdStart);
+  }
+
+  void playGameBoyStart() async {
+    if (_soundIdGameBoyStartStream != null) {
+      await _pool.stop(_soundIdGameBoyStartStream);
+    }
+    _soundIdGameBoyStartStream = await _pool.play(_soundIdGameBoyStart);
   }
 
   Sfx._internal();
