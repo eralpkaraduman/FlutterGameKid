@@ -10,7 +10,11 @@ class Screen extends StatelessWidget {
     return Container(
       child: Container(
         color: gameBoyColorLightestGreen,
-        child: System().loadedGame,
+        child: StreamBuilder<Widget>(
+            stream: System().loadedGameStream,
+            builder: (_, snap) {
+              return snap.data;
+            }),
       ),
     );
   }

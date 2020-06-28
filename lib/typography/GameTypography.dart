@@ -6,6 +6,7 @@ class GameTitleText extends Text {
       : super(
           data,
           key: key,
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Early-GameBoy',
             fontSize: 20,
@@ -19,6 +20,7 @@ class GameGiantText extends Text {
       : super(
           data,
           key: key,
+          textAlign: TextAlign.center,
           style: TextStyle(
               fontFamily: 'Early-GameBoy',
               fontSize: 60,
