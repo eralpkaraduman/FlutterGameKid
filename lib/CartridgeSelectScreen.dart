@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutterKid/cartridges/buttonGame/ButtonGameCartridge.dart';
+import 'package:flutterKid/system.dart';
 
 class CartridgeSelectScreen extends StatefulWidget {
   CartridgeSelectScreen({Key key}) : super(key: key);
@@ -8,7 +10,8 @@ class CartridgeSelectScreen extends StatefulWidget {
 }
 
 class _CartridgeSelectScreenState extends State<CartridgeSelectScreen> {
-  bool cartridgeInserted = false;
+  bool _cartridgeInserted = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -17,14 +20,20 @@ class _CartridgeSelectScreenState extends State<CartridgeSelectScreen> {
           alignment: Alignment.topCenter,
           children: <Widget>[
             AnimatedPositioned(
-              top: cartridgeInserted ? -20 : 340,
+              top: !_cartridgeInserted ? -20 : 335,
               width: 400,
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOut,
               child: InkWell(
                 child: Image.asset("assets/images/cartridge-button.png"),
                 onTap: () {
-                  setState(() => cartridgeInserted = !cartridgeInserted);
+                  if (_cartridgeInserted) {
+                    setState(() => _cartridgeInserted = false);
+                    System().loadCartridge(null);
+                  } else {
+                    setState(() => _cartridgeInserted = true);
+                    System().loadCartridge(ButtonGameCartridge());
+                  }
                 },
                 splashColor: Colors.brown.withOpacity(0.5),
               ),

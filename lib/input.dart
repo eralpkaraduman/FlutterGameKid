@@ -10,11 +10,14 @@ class Input {
   static final Input _singleton = Input._internal();
 
   // ignore: close_sinks
-  StreamController<bool> _keyAStreamController = StreamController<bool>();
+  StreamController<bool> _keyAStreamController =
+      StreamController<bool>.broadcast();
   // ignore: close_sinks
-  StreamController<bool> _keyBStreamController = StreamController<bool>();
+  StreamController<bool> _keyBStreamController =
+      StreamController<bool>.broadcast();
   // ignore: close_sinks
-  StreamController<bool> _keyStartStreamController = StreamController<bool>();
+  StreamController<bool> _keyStartStreamController =
+      StreamController<bool>.broadcast();
   Stream<bool> get _keyAStream => _keyAStreamController.stream;
   Stream<bool> get _keyBStream => _keyBStreamController.stream;
   Stream<bool> get _keyStartStream => _keyStartStreamController.stream;

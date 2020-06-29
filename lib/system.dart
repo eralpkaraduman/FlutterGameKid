@@ -9,25 +9,33 @@ class System {
 
   // ignore: close_sinks
   StreamController<Widget> _loadedGameStreamController =
-      StreamController<Widget>();
+      StreamController<Widget>.broadcast();
   Stream<Widget> get loadedGameStream => _loadedGameStreamController.stream;
 
   factory System() {
     return _singleton;
   }
 
-  void loadCartridge(Widget cartridgeWidget) {
-    bool empty = cartridgeWidget == null;
-    _loadedGame = BootAnimation(
-      noCartridge: empty,
-      onComplete: () async {
-        if (!empty) {
-          _loadedGame = cartridgeWidget;
-          updateStreams();
-        }
-      },
-    );
+  void _unloadCartridge() {
+    _loadedGame = Container();
     updateStreams();
+  }
+
+  void loadCartridge(Widget cartridgeWidget) {
+    _unloadCartridge();
+    Future.delayed(Duration(seconds: 1), () {
+      bool empty = cartridgeWidget == null;
+      _loadedGame = BootAnimation(
+        noCartridge: empty,
+        onComplete: () async {
+          if (!empty) {
+            _loadedGame = cartridgeWidget;
+            updateStreams();
+          }
+        },
+      );
+      updateStreams();
+    });
   }
 
   void updateStreams() {

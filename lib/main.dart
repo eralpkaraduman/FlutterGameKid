@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutterKid/sfx.dart';
 import 'package:flutterKid/system.dart';
 
-import 'cartridges/buttonGame/ButtonGameCartridge.dart';
+// import 'cartridges/buttonGame/ButtonGameCartridge.dart';
 
 void main() {
   runApp(MyApp());
