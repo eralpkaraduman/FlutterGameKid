@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterKid/typography/GameTypography.dart';
 import 'console.dart';
 import 'colors.dart';
+import 'CartridgeSelectScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final double swipeSenstivity = 30;
-  bool _showConsole = false;
+  bool _showConsole = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +32,14 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Stack(
             alignment: Alignment.topCenter,
             children: <Widget>[
+              CartridgeSelectScreen(),
               AnimatedOpacity(
                 opacity: _showConsole ? 1 : 0,
                 duration: Duration(milliseconds: 450),
                 child: Container(color: gameBoyColorBeige),
               ),
               Positioned(
-                top: size.height * 0.45,
+                top: size.height * 0.50,
                 child: AnimatedOpacity(
                   opacity: _showConsole ? 0 : 1,
                   duration: Duration(milliseconds: 450),

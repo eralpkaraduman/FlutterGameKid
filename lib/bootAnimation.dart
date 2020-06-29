@@ -19,7 +19,7 @@ class BootAnimation extends StatefulWidget {
 }
 
 class _BootAnimationState extends State<BootAnimation> {
-  EdgeInsetsGeometry _padding = EdgeInsets.zero;
+  double _padding = 0;
 
   final VoidCallback onComplete;
   final bool noCartridge;
@@ -31,25 +31,27 @@ class _BootAnimationState extends State<BootAnimation> {
     super.initState();
     Future.delayed(Duration(milliseconds: 400), () {
       setState(() {
-        _padding = EdgeInsets.fromLTRB(0, 95, 0, 0);
+        _padding = 95;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPadding(
-      duration: Duration(seconds: 3),
-      padding: _padding,
-      child: GameTitleText(noCartridge ? '███████©' : 'Flutter©'),
-      curve: Curves.linear,
-      onEnd: () {
-        Sfx().playGameBoyStart();
-        Future.delayed(Duration(seconds: 2), () {
-          // Play audio
-          onComplete();
-        });
-      },
+    return Stack(
+      alignment: Alignment.topCenter,
+      children: <Widget>[
+        AnimatedPositioned(
+          top: _padding,
+          duration: Duration(seconds: 4),
+          curve: Curves.linear,
+          child: GameTitleText(noCartridge ? '███████©' : 'Flutter©'),
+          onEnd: () {
+            Sfx().playGameBoyStart();
+            Future.delayed(Duration(seconds: 2), () => onComplete());
+          },
+        ),
+      ],
     );
   }
 }
