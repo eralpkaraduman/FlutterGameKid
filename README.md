@@ -2,7 +2,11 @@
 
 GameBoy Recreated with Flutter for Hack20 Hackaton
 
-<iframe width="1309" height="745" src="https://www.youtube.com/embed/lI7775DWzE8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+ 
+It's not possible to embed videos directly, but you can put an image which links to a YouTube video:
+
+[![Youtube video](https://img.youtube.com/vi/lI7775DWzE8/0.jpg)](https://www.youtube.com/watch?v=lI7775DWzE8)
 
 ## Featured
 
