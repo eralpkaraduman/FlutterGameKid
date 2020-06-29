@@ -20,7 +20,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: GestureDetector(
         onVerticalDragUpdate: (details) {
-          print(details.delta.dy);
           if (details.delta.dy > swipeSenstivity) {
             this.setState(() => _showConsole = false);
           } else if (details.delta.dy < -swipeSenstivity) {
@@ -32,12 +31,15 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Stack(
             alignment: Alignment.topCenter,
             children: <Widget>[
-              CartridgeSelectScreen(),
               AnimatedOpacity(
                 opacity: _showConsole ? 1 : 0,
                 duration: Duration(milliseconds: 450),
-                child: Container(color: gameBoyColorBeige),
+                child: AbsorbPointer(
+                  absorbing: false,
+                  child: Container(color: gameBoyColorBeige),
+                ),
               ),
+              CartridgeSelectScreen(),
               Positioned(
                 top: size.height * 0.50,
                 child: AnimatedOpacity(
