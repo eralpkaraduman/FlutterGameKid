@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutterKid/sfx.dart';
 import 'package:flutterKid/typography/GameTypography.dart';
@@ -11,15 +13,17 @@ class ButtonGameCartridge extends StatefulWidget {
 class _ButtonGameCartridgeState extends State<ButtonGameCartridge> {
   int _counter = 0;
   bool _gameStarted = false;
+  StreamSubscription _aKeySub;
+  StreamSubscription _startKeySub;
 
   void initState() {
-    Input().getStream(InputKey.A).listen((keyDown) {
+    _aKeySub = Input().getStream(InputKey.A).listen((keyDown) {
       if (_gameStarted && keyDown) {
         Sfx().playBlip();
         setState(() => _counter++);
       }
     });
-    Input().getStream(InputKey.Start).listen((keyDown) {
+    _startKeySub = Input().getStream(InputKey.Start).listen((keyDown) {
       if (!_gameStarted && keyDown) {
         Sfx().playStart();
         Future.delayed(Duration(seconds: 1), () {
@@ -28,6 +32,13 @@ class _ButtonGameCartridgeState extends State<ButtonGameCartridge> {
       }
     });
     super.initState();
+  }
+
+  @override
+  deactivate() {
+    _aKeySub.cancel();
+    _startKeySub.cancel();
+    super.deactivate();
   }
 
   @override
