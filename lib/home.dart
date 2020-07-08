@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   opacity: _showConsole ? 0 : 1,
                   duration: Duration(milliseconds: 450),
                   child: StreamBuilder<bool>(
+                    initialData: false,
                     stream: System().cartridgeInsertedStream,
                     builder: (_, snap) {
                       return RegularText(

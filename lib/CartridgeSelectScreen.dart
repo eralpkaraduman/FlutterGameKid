@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterKid/cartridges/buttonGame/ButtonGameCartridge.dart';
 import 'package:flutterKid/system.dart';
+import 'system.dart';
 
-class CartridgeSelectScreen extends StatefulWidget {
-  CartridgeSelectScreen({Key key}) : super(key: key);
-
-  @override
-  _CartridgeSelectScreenState createState() => _CartridgeSelectScreenState();
-}
-
-class _CartridgeSelectScreenState extends State<CartridgeSelectScreen> {
-  bool _cartridgeInserted = false;
-
+class CartridgeSelectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,25 +11,32 @@ class _CartridgeSelectScreenState extends State<CartridgeSelectScreen> {
         child: Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
-            AnimatedPositioned(
-              top: !_cartridgeInserted ? -65 : 278,
-              width: 400,
-              duration: Duration(milliseconds: 500),
-              curve: Curves.easeInOut,
-              child: InkWell(
-                child: Image.asset("assets/images/cartridge-button.png"),
-                onTap: () {
-                  if (_cartridgeInserted) {
-                    setState(() => _cartridgeInserted = false);
-                    System().loadCartridge(null);
-                  } else {
-                    setState(() => _cartridgeInserted = true);
-                    System().loadCartridge(ButtonGameCartridge());
-                  }
-                },
-                splashColor: Colors.brown.withOpacity(0.5),
-              ),
-            ),
+            StreamBuilder<bool>(
+              stream: System().cartridgeInsertedStream,
+              initialData: false,
+              builder: (_, snap) {
+                final bool _cartridgeInserted = snap.data;
+                return AnimatedPositioned(
+                  top: !_cartridgeInserted ? -65 : 278,
+                  width: 400,
+                  duration: Duration(milliseconds: 500),
+                  curve: _cartridgeInserted
+                      ? Curves.easeInCirc
+                      : Curves.easeInOutBack,
+                  child: InkWell(
+                    child: Image.asset("assets/images/cartridge-button.png"),
+                    onTap: () {
+                      if (_cartridgeInserted) {
+                        System().loadCartridge(null);
+                      } else {
+                        System().loadCartridge(ButtonGameCartridge());
+                      }
+                    },
+                    splashColor: Colors.brown.withOpacity(0.5),
+                  ),
+                );
+              },
+            )
           ],
         ),
       ),
