@@ -20,7 +20,7 @@ class _CartridgeSelectScreenState extends State<CartridgeSelectScreen> {
           alignment: Alignment.topCenter,
           children: <Widget>[
             AnimatedPositioned(
-              top: !_cartridgeInserted ? -20 : 335,
+              top: !_cartridgeInserted ? -65 : 278,
               width: 400,
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOut,

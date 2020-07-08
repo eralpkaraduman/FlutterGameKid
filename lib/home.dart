@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterKid/typography/GameTypography.dart';
 import 'console.dart';
 import 'colors.dart';
+import 'system.dart';
 import 'CartridgeSelectScreen.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -39,13 +40,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(color: gameBoyColorBeige),
                 ),
               ),
-              CartridgeSelectScreen(),
+              AnimatedOpacity(
+                opacity: _showConsole ? 0 : 1,
+                duration: Duration(milliseconds: 450),
+                child: CartridgeSelectScreen(),
+              ),
               Positioned(
-                top: size.height * 0.50,
+                top: size.height * 0.47,
                 child: AnimatedOpacity(
                   opacity: _showConsole ? 0 : 1,
                   duration: Duration(milliseconds: 450),
-                  child: RegularText('Swipe up to play'),
+                  child: StreamBuilder<bool>(
+                    stream: System().cartridgeInsertedStream,
+                    builder: (_, snap) {
+                      return RegularText(
+                        'Swipe up to play. Tap cartridge to ${snap.data ? 'eject' : 'insert'}',
+                      );
+                    },
+                  ),
                 ),
               ),
               AnimatedPositioned(

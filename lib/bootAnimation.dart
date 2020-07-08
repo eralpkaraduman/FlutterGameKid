@@ -31,7 +31,7 @@ class _BootAnimationState extends State<BootAnimation> {
     super.initState();
     Future.delayed(Duration(milliseconds: 400), () {
       setState(() {
-        _padding = 95;
+        _padding = 85;
       });
     });
   }

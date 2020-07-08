@@ -12,16 +12,23 @@ class System {
       StreamController<Widget>.broadcast();
   Stream<Widget> get loadedGameStream => _loadedGameStreamController.stream;
 
+// ignore: close_sinks
+  StreamController<bool> _cartridgeInsertedStreamController =
+      StreamController<bool>.broadcast();
+  Stream<bool> get cartridgeInsertedStream =>
+      _cartridgeInsertedStreamController.stream;
+
   factory System() {
     return _singleton;
   }
 
   void _unloadCartridge() {
     _loadedGame = Container();
-    updateStreams();
+    _loadedGameStreamController.sink.add(_loadedGame);
   }
 
   void loadCartridge(Widget cartridgeWidget) {
+    _cartridgeInsertedStreamController.sink.add(cartridgeWidget != null);
     _unloadCartridge();
     Future.delayed(Duration(seconds: 1), () {
       bool empty = cartridgeWidget == null;
@@ -30,17 +37,17 @@ class System {
         onComplete: () async {
           if (!empty) {
             _loadedGame = cartridgeWidget;
-            updateStreams();
+            _loadedGameStreamController.sink.add(_loadedGame);
           }
         },
       );
-      updateStreams();
+      _loadedGameStreamController.sink.add(_loadedGame);
     });
   }
 
-  void updateStreams() {
-    _loadedGameStreamController.sink.add(_loadedGame);
-  }
+  // void updateStreams() {
+  //   _loadedGameStreamController.sink.add(_loadedGame);
+  // }
 
   System._internal();
 }
