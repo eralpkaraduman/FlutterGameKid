@@ -4,7 +4,7 @@ GameBoy Recreated with Flutter for Hack20 Hackaton
 
 
  
-It's not possible to embed videos directly, but you can put an image which links to a YouTube video:
+Watch the demo video on youtube (click the image below)
 
 [![Youtube video](https://img.youtube.com/vi/lI7775DWzE8/0.jpg)](https://www.youtube.com/watch?v=lI7775DWzE8)
 
